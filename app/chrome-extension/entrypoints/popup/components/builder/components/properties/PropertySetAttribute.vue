@@ -3,20 +3,20 @@
     <SelectorEditor :node="node" :allowPick="true" />
     <div class="form-section">
       <div class="form-group">
-        <label class="form-label">属性名</label>
+        <label class="form-label">Nome do atributo</label>
         <input
           class="form-input"
           v-model="(node as any).config.name"
-          placeholder="如 value/src/disabled 等"
+          placeholder="Ex.: value/src/disabled"
         />
       </div>
       <div class="form-group">
-        <label class="form-label">属性值（留空并勾选删除则移除）</label>
-        <input class="form-input" v-model="(node as any).config.value" placeholder="属性值" />
+        <label class="form-label">Valor (para remover, deixe vazio e marque a opção abaixo)</label>
+        <input class="form-input" v-model="(node as any).config.value" placeholder="Valor" />
       </div>
       <div class="form-group checkbox-group">
         <label class="checkbox-label"
-          ><input type="checkbox" v-model="(node as any).config.remove" /> 删除属性</label
+          ><input type="checkbox" v-model="(node as any).config.remove" /> Remover atributo</label
         >
       </div>
     </div>

@@ -1,0 +1,510 @@
+{
+  "extensionName": {
+    "message": "chrome-mcp-server",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Expõe os recursos do navegador usando o seu próprio Chrome",
+    "description": "Extension description"
+  },
+  "nativeServerConfigLabel": {
+    "message": "Configuração do servidor nativo",
+    "description": "Main section header for native server settings"
+  },
+  "semanticEngineLabel": {
+    "message": "Mecanismo semântico",
+    "description": "Main section header for semantic engine"
+  },
+  "embeddingModelLabel": {
+    "message": "Modelo de embedding",
+    "description": "Main section header for model selection"
+  },
+  "indexDataManagementLabel": {
+    "message": "Gerenciamento de dados do índice",
+    "description": "Main section header for data management"
+  },
+  "modelCacheManagementLabel": {
+    "message": "Gerenciamento do cache de modelos",
+    "description": "Main section header for cache management"
+  },
+  "statusLabel": {
+    "message": "Status",
+    "description": "Generic status label"
+  },
+  "runningStatusLabel": {
+    "message": "Status",
+    "description": "Server running status label"
+  },
+  "connectionStatusLabel": {
+    "message": "Status da conexão",
+    "description": "Connection status label"
+  },
+  "lastUpdatedLabel": {
+    "message": "Última atualização:",
+    "description": "Last updated timestamp label"
+  },
+  "connectButton": {
+    "message": "Conectar",
+    "description": "Connect button text"
+  },
+  "disconnectButton": {
+    "message": "Desconectar",
+    "description": "Disconnect button text"
+  },
+  "connectingStatus": {
+    "message": "Conectando...",
+    "description": "Connecting status message"
+  },
+  "connectedStatus": {
+    "message": "Conectado",
+    "description": "Connected status message"
+  },
+  "disconnectedStatus": {
+    "message": "Desconectado",
+    "description": "Disconnected status message"
+  },
+  "detectingStatus": {
+    "message": "Detectando...",
+    "description": "Detecting status message"
+  },
+  "serviceRunningStatus": {
+    "message": "Serviço em execução (porta: $PORT$)",
+    "description": "Service running with port number",
+    "placeholders": {
+      "port": {
+        "content": "$1",
+        "example": "12306"
+      }
+    }
+  },
+  "serviceNotConnectedStatus": {
+    "message": "Serviço não conectado",
+    "description": "Service not connected status"
+  },
+  "connectedServiceNotStartedStatus": {
+    "message": "Conectado, serviço não iniciado",
+    "description": "Connected but service not started status"
+  },
+  "mcpServerConfigLabel": {
+    "message": "Configuração do servidor MCP",
+    "description": "MCP server configuration section label"
+  },
+  "connectionPortLabel": {
+    "message": "Porta de conexão",
+    "description": "Connection port input label"
+  },
+  "refreshStatusButton": {
+    "message": "Atualizar status",
+    "description": "Refresh status button tooltip"
+  },
+  "copyConfigButton": {
+    "message": "Copiar configuração",
+    "description": "Copy configuration button text"
+  },
+  "retryButton": {
+    "message": "Tentar novamente",
+    "description": "Retry button text"
+  },
+  "cancelButton": {
+    "message": "Cancelar",
+    "description": "Cancel button text"
+  },
+  "confirmButton": {
+    "message": "Confirmar",
+    "description": "Confirm button text"
+  },
+  "saveButton": {
+    "message": "Salvar",
+    "description": "Save button text"
+  },
+  "closeButton": {
+    "message": "Fechar",
+    "description": "Close button text"
+  },
+  "resetButton": {
+    "message": "Redefinir",
+    "description": "Reset button text"
+  },
+  "initializingStatus": {
+    "message": "Inicializando...",
+    "description": "Initializing progress message"
+  },
+  "processingStatus": {
+    "message": "Processando...",
+    "description": "Processing progress message"
+  },
+  "loadingStatus": {
+    "message": "Carregando...",
+    "description": "Loading progress message"
+  },
+  "clearingStatus": {
+    "message": "Limpando...",
+    "description": "Clearing progress message"
+  },
+  "cleaningStatus": {
+    "message": "Limpando...",
+    "description": "Cleaning progress message"
+  },
+  "downloadingStatus": {
+    "message": "Baixando...",
+    "description": "Downloading progress message"
+  },
+  "semanticEngineReadyStatus": {
+    "message": "Mecanismo semântico pronto",
+    "description": "Semantic engine ready status"
+  },
+  "semanticEngineInitializingStatus": {
+    "message": "Inicializando o mecanismo semântico...",
+    "description": "Semantic engine initializing status"
+  },
+  "semanticEngineInitFailedStatus": {
+    "message": "Falha ao inicializar o mecanismo semântico",
+    "description": "Semantic engine initialization failed status"
+  },
+  "semanticEngineNotInitStatus": {
+    "message": "Mecanismo semântico não inicializado",
+    "description": "Semantic engine not initialized status"
+  },
+  "initSemanticEngineButton": {
+    "message": "Inicializar mecanismo semântico",
+    "description": "Initialize semantic engine button text"
+  },
+  "reinitializeButton": {
+    "message": "Reinicializar",
+    "description": "Reinitialize button text"
+  },
+  "downloadingModelStatus": {
+    "message": "Baixando modelo... $PROGRESS$%",
+    "description": "Model download progress with percentage",
+    "placeholders": {
+      "progress": {
+        "content": "$1",
+        "example": "50"
+      }
+    }
+  },
+  "switchingModelStatus": {
+    "message": "Trocando de modelo...",
+    "description": "Model switching progress message"
+  },
+  "modelLoadedStatus": {
+    "message": "Modelo carregado",
+    "description": "Model successfully loaded status"
+  },
+  "modelFailedStatus": {
+    "message": "Falha ao carregar o modelo",
+    "description": "Model failed to load status"
+  },
+  "lightweightModelDescription": {
+    "message": "Modelo multilíngue leve",
+    "description": "Description for lightweight model option"
+  },
+  "betterThanSmallDescription": {
+    "message": "Um pouco maior que o e5-small, mas com desempenho melhor",
+    "description": "Description for medium model option"
+  },
+  "multilingualModelDescription": {
+    "message": "Modelo semântico multilíngue",
+    "description": "Description for multilingual model option"
+  },
+  "fastPerformance": {
+    "message": "Rápido",
+    "description": "Fast performance indicator"
+  },
+  "balancedPerformance": {
+    "message": "Equilibrado",
+    "description": "Balanced performance indicator"
+  },
+  "accuratePerformance": {
+    "message": "Preciso",
+    "description": "Accurate performance indicator"
+  },
+  "networkErrorMessage": {
+    "message": "Erro de conexão de rede. Verifique a rede e tente novamente",
+    "description": "Network connection error message"
+  },
+  "modelCorruptedErrorMessage": {
+    "message": "Arquivo do modelo corrompido ou incompleto. Tente baixar novamente",
+    "description": "Model corruption error message"
+  },
+  "unknownErrorMessage": {
+    "message": "Erro desconhecido. Verifique se a sua rede consegue acessar o HuggingFace",
+    "description": "Unknown error fallback message"
+  },
+  "permissionDeniedErrorMessage": {
+    "message": "Permissão negada",
+    "description": "Permission denied error message"
+  },
+  "timeoutErrorMessage": {
+    "message": "A operação excedeu o tempo limite",
+    "description": "Timeout error message"
+  },
+  "indexedPagesLabel": {
+    "message": "Páginas indexadas",
+    "description": "Number of indexed pages label"
+  },
+  "indexSizeLabel": {
+    "message": "Tamanho do índice",
+    "description": "Index size label"
+  },
+  "activeTabsLabel": {
+    "message": "Abas ativas",
+    "description": "Number of active tabs label"
+  },
+  "vectorDocumentsLabel": {
+    "message": "Documentos vetoriais",
+    "description": "Number of vector documents label"
+  },
+  "cacheSizeLabel": {
+    "message": "Tamanho do cache",
+    "description": "Cache size label"
+  },
+  "cacheEntriesLabel": {
+    "message": "Entradas no cache",
+    "description": "Number of cache entries label"
+  },
+  "clearAllDataButton": {
+    "message": "Limpar todos os dados",
+    "description": "Clear all data button text"
+  },
+  "clearAllCacheButton": {
+    "message": "Limpar todo o cache",
+    "description": "Clear all cache button text"
+  },
+  "cleanExpiredCacheButton": {
+    "message": "Limpar cache expirado",
+    "description": "Clean expired cache button text"
+  },
+  "exportDataButton": {
+    "message": "Exportar dados",
+    "description": "Export data button text"
+  },
+  "importDataButton": {
+    "message": "Importar dados",
+    "description": "Import data button text"
+  },
+  "confirmClearDataTitle": {
+    "message": "Confirmar limpeza dos dados",
+    "description": "Clear data confirmation dialog title"
+  },
+  "settingsTitle": {
+    "message": "Configurações",
+    "description": "Settings dialog title"
+  },
+  "aboutTitle": {
+    "message": "Sobre",
+    "description": "About dialog title"
+  },
+  "helpTitle": {
+    "message": "Ajuda",
+    "description": "Help dialog title"
+  },
+  "clearDataWarningMessage": {
+    "message": "Esta operação vai apagar todo o conteúdo indexado das páginas e os dados vetoriais, incluindo:",
+    "description": "Clear data warning message"
+  },
+  "clearDataList1": {
+    "message": "Todo o índice de texto das páginas",
+    "description": "First item in clear data list"
+  },
+  "clearDataList2": {
+    "message": "Dados de embeddings vetoriais",
+    "description": "Second item in clear data list"
+  },
+  "clearDataList3": {
+    "message": "Histórico de pesquisa e cache",
+    "description": "Third item in clear data list"
+  },
+  "clearDataIrreversibleWarning": {
+    "message": "Esta operação é irreversível! Depois da limpeza, será preciso navegar pelas páginas de novo para reconstruir o índice.",
+    "description": "Irreversible operation warning"
+  },
+  "confirmClearButton": {
+    "message": "Confirmar limpeza",
+    "description": "Confirm clear action button"
+  },
+  "cacheDetailsLabel": {
+    "message": "Detalhes do cache",
+    "description": "Cache details section label"
+  },
+  "noCacheDataMessage": {
+    "message": "Nenhum dado em cache",
+    "description": "No cache data available message"
+  },
+  "loadingCacheInfoStatus": {
+    "message": "Carregando informações do cache...",
+    "description": "Loading cache information status"
+  },
+  "processingCacheStatus": {
+    "message": "Processando o cache...",
+    "description": "Processing cache status"
+  },
+  "expiredLabel": {
+    "message": "Expirado",
+    "description": "Expired item label"
+  },
+  "bookmarksBarLabel": {
+    "message": "Barra de favoritos",
+    "description": "Bookmarks bar folder name"
+  },
+  "newTabLabel": {
+    "message": "Nova aba",
+    "description": "New tab label"
+  },
+  "currentPageLabel": {
+    "message": "Página atual",
+    "description": "Current page label"
+  },
+  "menuLabel": {
+    "message": "Menu",
+    "description": "Menu accessibility label"
+  },
+  "navigationLabel": {
+    "message": "Navegação",
+    "description": "Navigation accessibility label"
+  },
+  "mainContentLabel": {
+    "message": "Conteúdo principal",
+    "description": "Main content accessibility label"
+  },
+  "languageSelectorLabel": {
+    "message": "Idioma",
+    "description": "Language selector label"
+  },
+  "themeLabel": {
+    "message": "Tema",
+    "description": "Theme selector label"
+  },
+  "lightTheme": {
+    "message": "Claro",
+    "description": "Light theme option"
+  },
+  "darkTheme": {
+    "message": "Escuro",
+    "description": "Dark theme option"
+  },
+  "autoTheme": {
+    "message": "Automático",
+    "description": "Auto theme option"
+  },
+  "advancedSettingsLabel": {
+    "message": "Configurações avançadas",
+    "description": "Advanced settings section label"
+  },
+  "debugModeLabel": {
+    "message": "Modo de depuração",
+    "description": "Debug mode toggle label"
+  },
+  "verboseLoggingLabel": {
+    "message": "Log detalhado",
+    "description": "Verbose logging toggle label"
+  },
+  "successNotification": {
+    "message": "Operação concluída com sucesso",
+    "description": "Generic success notification"
+  },
+  "warningNotification": {
+    "message": "Atenção: revise antes de continuar",
+    "description": "Generic warning notification"
+  },
+  "infoNotification": {
+    "message": "Informação",
+    "description": "Generic info notification"
+  },
+  "configCopiedNotification": {
+    "message": "Configuração copiada para a área de transferência",
+    "description": "Configuration copied success message"
+  },
+  "dataClearedNotification": {
+    "message": "Dados limpos com sucesso",
+    "description": "Data cleared success message"
+  },
+  "bytesUnit": {
+    "message": "bytes",
+    "description": "Bytes unit"
+  },
+  "kilobytesUnit": {
+    "message": "KB",
+    "description": "Kilobytes unit"
+  },
+  "megabytesUnit": {
+    "message": "MB",
+    "description": "Megabytes unit"
+  },
+  "gigabytesUnit": {
+    "message": "GB",
+    "description": "Gigabytes unit"
+  },
+  "itemsUnit": {
+    "message": "itens",
+    "description": "Items count unit"
+  },
+  "pagesUnit": {
+    "message": "páginas",
+    "description": "Pages count unit"
+  },
+  "userscriptsManagerTitle": {
+    "message": "Gerenciador de userscripts",
+    "description": "Options page title"
+  },
+  "emergencySwitchLabel": {
+    "message": "Interruptor de emergência",
+    "description": "Global disable switch"
+  },
+  "createRunSectionTitle": {
+    "message": "Criar / Executar",
+    "description": "Create & run section title"
+  },
+  "nameLabel": { "message": "Nome", "description": "Name input label" },
+  "runAtLabel": { "message": "Momento de execução", "description": "runAt select label" },
+  "runAtAuto": { "message": "automático", "description": "runAt auto" },
+  "runAtDocumentStart": { "message": "document_start", "description": "runAt document_start" },
+  "runAtDocumentEnd": { "message": "document_end", "description": "runAt document_end" },
+  "runAtDocumentIdle": { "message": "document_idle", "description": "runAt document_idle" },
+  "worldLabel": { "message": "Contexto de execução", "description": "world select label" },
+  "worldAuto": { "message": "automático", "description": "world auto" },
+  "worldIsolated": { "message": "Isolado (ISOLATED)", "description": "ISOLATED world" },
+  "worldMain": { "message": "Página (MAIN)", "description": "MAIN world" },
+  "modeLabel": { "message": "Modo", "description": "mode select label" },
+  "modeAuto": { "message": "automático", "description": "mode auto" },
+  "modePersistent": { "message": "persistente", "description": "mode persistent" },
+  "modeCss": { "message": "só estilos (CSS)", "description": "mode css" },
+  "modeOnce": { "message": "uma vez", "description": "mode once" },
+  "allFramesLabel": { "message": "Todos os frames", "description": "allFrames checkbox" },
+  "persistLabel": { "message": "Persistir", "description": "persist checkbox" },
+  "dnrFallbackLabel": { "message": "Fallback DNR", "description": "dnr fallback checkbox" },
+  "matchesInputLabel": {
+    "message": "Incluir (separados por vírgula)",
+    "description": "matches input"
+  },
+  "excludesInputLabel": {
+    "message": "Excluir (separados por vírgula)",
+    "description": "excludes input"
+  },
+  "tagsInputLabel": { "message": "Tags (separadas por vírgula)", "description": "tags input" },
+  "scriptLabel": { "message": "Script", "description": "script textarea label" },
+  "applyButton": { "message": "Aplicar", "description": "apply button" },
+  "runOnceButton": { "message": "Executar uma vez (CDP)", "description": "run once button" },
+  "listSectionTitle": { "message": "Lista de scripts", "description": "list section title" },
+  "queryLabel": { "message": "Buscar", "description": "query input label" },
+  "statusAll": { "message": "todos", "description": "status all" },
+  "statusEnabled": { "message": "ativados", "description": "status enabled" },
+  "statusDisabled": { "message": "desativados", "description": "status disabled" },
+  "domainLabel": { "message": "Domínio", "description": "domain filter label" },
+  "exportAllButton": { "message": "Exportar tudo", "description": "export button" },
+  "tableHeaderName": { "message": "Nome", "description": "table header name" },
+  "tableHeaderWorld": { "message": "Contexto", "description": "table header world" },
+  "tableHeaderRunAt": { "message": "Execução", "description": "table header runAt" },
+  "tableHeaderUpdated": { "message": "Atualizado em", "description": "table header updated" },
+  "deleteButton": { "message": "Excluir", "description": "delete button" },
+  "placeholderOptional": { "message": "opcional", "description": "generic optional placeholder" },
+  "placeholderMatchesExample": {
+    "message": "ex.: https://*.example.com/*",
+    "description": "matches example placeholder"
+  },
+  "placeholderScriptHint": {
+    "message": "Cole JS/CSS/TM aqui",
+    "description": "script textarea placeholder"
+  },
+  "placeholderDomainHint": { "message": "example.com", "description": "domain filter placeholder" }
+}

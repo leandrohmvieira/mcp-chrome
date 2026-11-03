@@ -5,13 +5,13 @@
       <button class="btn-sm" @click="addIfCase">+ Add</button>
     </div>
     <div class="text-xs text-slate-500" style="padding: 0 20px"
-      >使用表达式定义分支，支持变量与常见比较运算符。</div
+      >Defina ramificações com expressões; aceita variáveis e operadores de comparação comuns.</div
     >
     <div class="if-case-list" data-field="if.branches">
       <div class="if-case-item" v-for="(c, i) in ifBranches" :key="c.id">
         <div class="if-case-header">
-          <input class="form-input-sm flex-1" v-model="c.name" placeholder="分支名称（可选）" />
-          <button class="btn-icon-sm danger" @click="removeIfCase(i)" title="删除">×</button>
+          <input class="form-input-sm flex-1" v-model="c.name" placeholder="Nome (opcional)" />
+          <button class="btn-icon-sm danger" @click="removeIfCase(i)" title="Excluir">×</button>
         </div>
         <div class="if-case-expr">
           <VarInput
@@ -26,7 +26,7 @@
               @change="(e: any) => insertVar(e.target.value, i)"
               :value="''"
             >
-              <option value="" disabled>插入变量</option>
+              <option value="" disabled>Inserir variável</option>
               <option v-for="v in variables" :key="v.key" :value="v.key">{{ v.key }}</option>
             </select>
             <select
@@ -34,14 +34,14 @@
               @change="(e: any) => insertOp(e.target.value, i)"
               :value="''"
             >
-              <option value="" disabled>运算符</option>
+              <option value="" disabled>Operador</option>
               <option v-for="op in ops" :key="op" :value="op">{{ op }}</option>
             </select>
           </div>
         </div>
       </div>
       <div class="if-case-else" v-if="elseEnabled">
-        <div class="text-xs text-slate-500">Else 分支（无需表达式，将匹配以上条件都不成立时）</div>
+        <div class="text-xs text-slate-500">Else (sem expressão): se nenhuma for atendida</div>
       </div>
     </div>
   </div>

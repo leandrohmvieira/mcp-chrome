@@ -3,19 +3,19 @@
     <SelectorEditor :node="node" :allowPick="true" />
     <div class="form-section">
       <div class="form-group">
-        <label class="form-label">事件类型</label>
+        <label class="form-label">Tipo de evento</label>
         <input
           class="form-input"
           v-model="(node as any).config.event"
-          placeholder="如 input/change/mouseover"
+          placeholder="Ex.: input/change/mouseover"
         />
       </div>
       <div class="form-group checkbox-group">
         <label class="checkbox-label"
-          ><input type="checkbox" v-model="(node as any).config.bubbles" /> 冒泡</label
+          ><input type="checkbox" v-model="(node as any).config.bubbles" /> Propagar</label
         >
         <label class="checkbox-label"
-          ><input type="checkbox" v-model="(node as any).config.cancelable" /> 可取消</label
+          ><input type="checkbox" v-model="(node as any).config.cancelable" /> Cancelável</label
         >
       </div>
     </div>

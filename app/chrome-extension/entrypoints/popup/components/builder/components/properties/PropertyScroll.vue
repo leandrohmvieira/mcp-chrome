@@ -1,25 +1,25 @@
 <template>
   <div>
     <div class="form-row">
-      <label class="form-label">模式</label>
+      <label class="form-label">Modo</label>
       <select v-model="cfg.mode" class="form-select-sm">
-        <option value="element">滚动到元素</option>
-        <option value="offset">窗口偏移</option>
-        <option value="container">容器偏移</option>
+        <option value="element">Rolar até o elemento</option>
+        <option value="offset">Deslocamento da janela</option>
+        <option value="container">Deslocamento do contêiner</option>
       </select>
     </div>
 
     <div v-if="cfg.mode === 'element'" class="mt-2">
-      <SelectorEditor :node="node" :allowPick="true" title="目标元素" targetKey="target" />
+      <SelectorEditor :node="node" :allowPick="true" title="Elemento alvo" targetKey="target" />
     </div>
 
     <div v-if="cfg.mode !== 'element'" class="mt-2">
       <div class="form-row">
-        <label class="form-label">偏移 X</label>
+        <label class="form-label">Deslocamento X</label>
         <input type="number" class="form-input-sm" v-model.number="cfg.offset.x" placeholder="0" />
       </div>
       <div class="form-row">
-        <label class="form-label">偏移 Y</label>
+        <label class="form-label">Deslocamento Y</label>
         <input
           type="number"
           class="form-input-sm"
@@ -28,8 +28,8 @@
         />
       </div>
       <div v-if="cfg.mode === 'container'" class="mt-2">
-        <SelectorEditor :node="node" :allowPick="true" title="容器选择器" targetKey="target" />
-        <div class="hint"><small>容器需支持 scrollTo(top,left)</small></div>
+        <SelectorEditor :node="node" :allowPick="true" title="Contêiner" targetKey="target" />
+        <div class="hint"><small>O contêiner precisa suportar scrollTo(top,left)</small></div>
       </div>
     </div>
   </div>

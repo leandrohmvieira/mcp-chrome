@@ -1,11 +1,11 @@
 <template>
   <div class="form-section">
     <div class="form-group">
-      <label class="form-label">按键序列</label>
+      <label class="form-label">Sequência de teclas</label>
       <input
         class="form-input"
         v-model="(node as any).config.keys"
-        placeholder="如 Backspace Enter 或 cmd+a"
+        placeholder="Ex.: Backspace Enter ou cmd+a"
       />
     </div>
   </div>

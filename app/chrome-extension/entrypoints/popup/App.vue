@@ -70,33 +70,33 @@
 
         <!-- 快捷工具卡片 -->
         <div class="section">
-          <h2 class="section-title">快捷工具</h2>
+          <h2 class="section-title">Ferramentas rápidas</h2>
           <div class="rr-icon-buttons">
             <button
               class="rr-icon-btn rr-icon-btn-record rr-icon-btn-coming-soon has-tooltip"
               @click="startRecording"
-              data-tooltip="录制功能开发中"
+              data-tooltip="Gravação em desenvolvimento"
             >
               <RecordIcon :recording="false" />
             </button>
             <button
               class="rr-icon-btn rr-icon-btn-stop rr-icon-btn-coming-soon has-tooltip"
               @click="stopRecording"
-              data-tooltip="录制功能开发中"
+              data-tooltip="Gravação em desenvolvimento"
             >
               <StopIcon />
             </button>
             <button
               class="rr-icon-btn rr-icon-btn-edit has-tooltip"
               @click="toggleWebEditor"
-              data-tooltip="开启页面编辑模式"
+              data-tooltip="Ativar modo de edição da página"
             >
               <EditIcon />
             </button>
             <button
               class="rr-icon-btn rr-icon-btn-marker has-tooltip"
               @click="toggleElementMarker"
-              data-tooltip="开启元素标注"
+              data-tooltip="Ativar marcação de elementos"
             >
               <MarkerIcon />
             </button>
@@ -105,7 +105,7 @@
 
         <!-- 管理入口卡片 -->
         <div class="section">
-          <h2 class="section-title">管理入口</h2>
+          <h2 class="section-title">Gerenciamento</h2>
           <div class="entry-card">
             <button class="entry-item" @click="openAgentSidepanel">
               <div class="entry-icon agent">
@@ -125,8 +125,8 @@
                 </svg>
               </div>
               <div class="entry-content">
-                <span class="entry-title">智能助手</span>
-                <span class="entry-desc">AI Agent 对话与任务</span>
+                <span class="entry-title">Assistente IA</span>
+                <span class="entry-desc">Conversas e tarefas com o agente de IA</span>
               </div>
               <svg
                 class="entry-arrow"
@@ -146,10 +146,10 @@
               </div>
               <div class="entry-content">
                 <span class="entry-title">
-                  工作流管理
+                  Workflows
                   <span class="coming-soon-badge">Coming Soon</span>
                 </span>
-                <span class="entry-desc">录制与回放自动化流程</span>
+                <span class="entry-desc">Grave e reproduza automações</span>
               </div>
               <svg
                 class="entry-arrow"
@@ -181,8 +181,8 @@
                 </svg>
               </div>
               <div class="entry-content">
-                <span class="entry-title">元素标注管理</span>
-                <span class="entry-desc">管理页面元素标注</span>
+                <span class="entry-title">Marcações de elementos</span>
+                <span class="entry-desc">Gerencie as marcações da página</span>
               </div>
               <svg
                 class="entry-arrow"
@@ -214,8 +214,8 @@
                 </svg>
               </div>
               <div class="entry-content">
-                <span class="entry-title">本地模型</span>
-                <span class="entry-desc">语义引擎与模型管理</span>
+                <span class="entry-title">Modelo local</span>
+                <span class="entry-desc">Mecanismo semântico e modelos</span>
               </div>
               <svg
                 class="entry-arrow"
@@ -325,7 +325,7 @@
           <circle cx="12" cy="12" r="10" />
           <path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
-        <span>{{ comingSoonToast.feature }} 功能开发中，敬请期待</span>
+        <span>{{ comingSoonToast.feature }}: em desenvolvimento, aguarde</span>
       </div>
     </Transition>
   </div>
@@ -433,7 +433,7 @@ function isFlowBoundToCurrent(flow: any) {
 // 运行记录与覆盖项在侧边栏页面查看
 const startRecording = async () => {
   // TODO: 录制回放功能开发中，暂时拦截
-  showComingSoonToast('录制回放');
+  showComingSoonToast('Gravação e reprodução');
   return;
   // if (rrRecording.value) return;
   // try {
@@ -450,7 +450,7 @@ const startRecording = async () => {
 
 const stopRecording = async () => {
   // TODO: 录制回放功能开发中，暂时拦截
-  showComingSoonToast('录制回放');
+  showComingSoonToast('Gravação e reprodução');
   return;
   // if (!rrRecording.value) return;
   // try {
@@ -485,7 +485,7 @@ const runFlow = async (flowId: string) => {
       options: { ...runOptions, ...ov, returnLogs: true },
     });
     if (!(res && res.success)) {
-      console.warn('回放失败');
+      console.warn('Falha na reprodução');
       return;
     }
     // If failed, open builder and focus the failed node
@@ -506,7 +506,7 @@ const runFlow = async (flowId: string) => {
       }
     } catch {}
   } catch (e) {
-    console.error('回放失败:', e);
+    console.error('Falha na reprodução:', e);
   }
 };
 
@@ -635,7 +635,7 @@ async function openSidepanelAndClose(tab: string) {
 // Open sidepanel from popup for workflow management
 function openWorkflowSidepanel() {
   // TODO: 工作流功能开发中，暂时拦截
-  showComingSoonToast('工作流管理');
+  showComingSoonToast('Workflows');
   // openSidepanelAndClose('workflows');
 }
 
@@ -653,7 +653,7 @@ async function toggleWebEditor() {
   try {
     await chrome.runtime.sendMessage({ type: BACKGROUND_MESSAGE_TYPES.WEB_EDITOR_TOGGLE });
   } catch (error) {
-    console.warn('切换网页编辑模式失败:', error);
+    console.warn('Falha ao alternar o modo de edição da página:', error);
   }
 }
 
@@ -662,7 +662,7 @@ async function toggleElementMarker() {
     // 获取当前活动tab
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     if (!tab?.id) {
-      console.warn('无法获取当前tab');
+      console.warn('Não foi possível obter a aba atual');
       return;
     }
 
@@ -672,7 +672,7 @@ async function toggleElementMarker() {
       tabId: tab.id,
     });
   } catch (error) {
-    console.warn('开启元素标注失败:', error);
+    console.warn('Falha ao ativar a marcação de elementos:', error);
   }
 }
 
@@ -860,7 +860,7 @@ const saveSemanticEngineState = async () => {
     // eslint-disable-next-line no-undef
     await chrome.storage.local.set({ semanticEngineState });
   } catch (error) {
-    console.error('保存语义引擎状态失败:', error);
+    console.error('Falha ao salvar o estado do mecanismo semântico:', error);
   }
 };
 
@@ -997,7 +997,7 @@ const checkNativeConnection = async () => {
     const response = await chrome.runtime.sendMessage({ type: 'ping_native' });
     nativeConnectionStatus.value = response?.connected ? 'connected' : 'disconnected';
   } catch (error) {
-    console.error('检测 Native 连接状态失败:', error);
+    console.error('Falha ao verificar o status da conexão nativa:', error);
     nativeConnectionStatus.value = 'disconnected';
   }
 };
@@ -1016,7 +1016,7 @@ const checkServerStatus = async () => {
       nativeConnectionStatus.value = response.connected ? 'connected' : 'disconnected';
     }
   } catch (error) {
-    console.error('检测服务器状态失败:', error);
+    console.error('Falha ao verificar o status do servidor:', error);
   }
 };
 
@@ -1034,7 +1034,7 @@ const refreshServerStatus = async () => {
       nativeConnectionStatus.value = response.connected ? 'connected' : 'disconnected';
     }
   } catch (error) {
-    console.error('刷新服务器状态失败:', error);
+    console.error('Falha ao atualizar o status do servidor:', error);
   }
 };
 
@@ -1047,7 +1047,7 @@ const copyMcpConfig = async () => {
       copyButtonText.value = getMessage('copyConfigButton');
     }, 2000);
   } catch (error) {
-    console.error('复制配置失败:', error);
+    console.error('Falha ao copiar a configuração:', error);
     copyButtonText.value = '❌' + getMessage('networkErrorMessage');
 
     setTimeout(() => {
@@ -1065,7 +1065,7 @@ const testNativeConnection = async () => {
       await chrome.runtime.sendMessage({ type: 'disconnect_native' });
       nativeConnectionStatus.value = 'disconnected';
     } else {
-      console.log(`尝试连接到端口: ${nativeServerPort.value}`);
+      console.log(`Tentando conectar à porta: ${nativeServerPort.value}`);
       // eslint-disable-next-line no-undef
       const response = await chrome.runtime.sendMessage({
         type: 'connectNative',
@@ -1073,15 +1073,15 @@ const testNativeConnection = async () => {
       });
       if (response && response.success) {
         nativeConnectionStatus.value = 'connected';
-        console.log('连接成功:', response);
+        console.log('Conectado com sucesso:', response);
         await savePortPreference(nativeServerPort.value);
       } else {
         nativeConnectionStatus.value = 'disconnected';
-        console.error('连接失败:', response);
+        console.error('Falha na conexão:', response);
       }
     }
   } catch (error) {
-    console.error('测试连接失败:', error);
+    console.error('Falha ao testar a conexão:', error);
     nativeConnectionStatus.value = 'disconnected';
   } finally {
     isConnecting.value = false;
@@ -1158,7 +1158,7 @@ const loadModelPreference = async () => {
       semanticEngineStatus.value = 'idle';
     }
   } catch (error) {
-    console.error('❌ 加载模型偏好失败:', error);
+    console.error('❌ Falha ao carregar a preferência de modelo:', error);
   }
 };
 
@@ -1167,7 +1167,7 @@ const saveModelPreference = async (model: ModelPreset) => {
     // eslint-disable-next-line no-undef
     await chrome.storage.local.set({ selectedModel: model });
   } catch (error) {
-    console.error('保存模型偏好失败:', error);
+    console.error('Falha ao salvar a preferência de modelo:', error);
   }
 };
 
@@ -1176,7 +1176,7 @@ const saveVersionPreference = async (version: 'full' | 'quantized' | 'compressed
     // eslint-disable-next-line no-undef
     await chrome.storage.local.set({ selectedVersion: version });
   } catch (error) {
-    console.error('保存版本偏好失败:', error);
+    console.error('Falha ao salvar a preferência de versão:', error);
   }
 };
 
@@ -1184,9 +1184,9 @@ const savePortPreference = async (port: number) => {
   try {
     // eslint-disable-next-line no-undef
     await chrome.storage.local.set({ nativeServerPort: port });
-    console.log(`端口偏好已保存: ${port}`);
+    console.log(`Preferência de porta salva: ${port}`);
   } catch (error) {
-    console.error('保存端口偏好失败:', error);
+    console.error('Falha ao salvar a preferência de porta:', error);
   }
 };
 
@@ -1196,10 +1196,10 @@ const loadPortPreference = async () => {
     const result = await chrome.storage.local.get(['nativeServerPort']);
     if (result.nativeServerPort) {
       nativeServerPort.value = result.nativeServerPort;
-      console.log(`端口偏好已加载: ${result.nativeServerPort}`);
+      console.log(`Preferência de porta carregada: ${result.nativeServerPort}`);
     }
   } catch (error) {
-    console.error('加载端口偏好失败:', error);
+    console.error('Falha ao carregar a preferência de porta:', error);
   }
 };
 
@@ -1214,7 +1214,7 @@ const saveModelState = async () => {
     // eslint-disable-next-line no-undef
     await chrome.storage.local.set({ modelState });
   } catch (error) {
-    console.error('保存模型状态失败:', error);
+    console.error('Falha ao salvar o estado do modelo:', error);
   }
 };
 
@@ -1254,7 +1254,7 @@ const startModelStatusMonitoring = () => {
         }
       }
     } catch (error) {
-      console.error('获取模型状态失败:', error);
+      console.error('Falha ao obter o status do modelo:', error);
     }
   }, 1000);
 };
@@ -1440,7 +1440,7 @@ const switchModel = async (newModel: ModelPreset) => {
       currentModel.value = newModel;
       modelSwitchProgress.value = getMessage('successNotification');
       console.log(
-        '模型切换成功:',
+        'Modelo trocado com sucesso:',
         newModel,
         'version: quantized',
         'dimension:',
@@ -1458,13 +1458,13 @@ const switchModel = async (newModel: ModelPreset) => {
       throw new Error(response?.error || 'Model switch failed');
     }
   } catch (error: any) {
-    console.error('模型切换失败:', error);
+    console.error('Falha ao trocar de modelo:', error);
     modelSwitchProgress.value = `Model switch failed: ${error?.message || 'Unknown error'}`;
 
     modelInitializationStatus.value = 'error';
     isModelDownloading.value = false;
 
-    const errorMessage = error?.message || '未知错误';
+    const errorMessage = error?.message || 'Erro desconhecido';
     if (
       errorMessage.includes('network') ||
       errorMessage.includes('fetch') ||

@@ -393,7 +393,9 @@ if (process.platform === 'win32') {
   try {
     isAdmin = require('is-admin');
   } catch (error) {
-    console.warn('缺少is-admin依赖，Windows平台下可能无法正确检测管理员权限');
+    console.warn(
+      'Dependência is-admin ausente; no Windows talvez não seja possível detectar permissões de administrador corretamente',
+    );
     console.warn(error);
   }
 }
@@ -529,7 +531,7 @@ export async function registerWithElevatedPermissions(): Promise<void> {
       }
     }
   } catch (error: any) {
-    console.error(colorText(`注册失败: ${error.message}`, 'red'));
+    console.error(colorText(`Falha no registro: ${error.message}`, 'red'));
     throw error;
   }
 }

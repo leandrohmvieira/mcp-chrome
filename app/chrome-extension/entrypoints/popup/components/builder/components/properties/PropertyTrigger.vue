@@ -2,54 +2,54 @@
   <div class="form-section">
     <div class="form-group checkbox-group">
       <label class="checkbox-label"
-        ><input type="checkbox" v-model="cfg.enabled" /> 启用触发器</label
+        ><input type="checkbox" v-model="cfg.enabled" /> Ativar gatilho</label
       >
     </div>
     <div class="form-group">
-      <label class="form-label">描述（可选）</label>
-      <input class="form-input" v-model="cfg.description" placeholder="说明此触发器的用途" />
+      <label class="form-label">Descrição (opcional)</label>
+      <input class="form-input" v-model="cfg.description" placeholder="Para que serve o gatilho" />
     </div>
   </div>
 
   <div class="divider"></div>
 
   <div class="form-section">
-    <div class="section-header"><span class="section-title">触发方式</span></div>
+    <div class="section-header"><span class="section-title">Formas de disparo</span></div>
     <div class="form-group checkbox-group">
       <label class="checkbox-label"
-        ><input type="checkbox" v-model="cfg.modes.manual" /> 手动</label
+        ><input type="checkbox" v-model="cfg.modes.manual" /> Manual</label
       >
       <label class="checkbox-label"
-        ><input type="checkbox" v-model="cfg.modes.url" /> 访问 URL</label
+        ><input type="checkbox" v-model="cfg.modes.url" /> Ao acessar URL</label
       >
       <label class="checkbox-label"
-        ><input type="checkbox" v-model="cfg.modes.contextMenu" /> 右键菜单</label
+        ><input type="checkbox" v-model="cfg.modes.contextMenu" /> Menu de contexto</label
       >
       <label class="checkbox-label"
-        ><input type="checkbox" v-model="cfg.modes.command" /> 快捷键</label
+        ><input type="checkbox" v-model="cfg.modes.command" /> Atalho</label
       >
       <label class="checkbox-label"
-        ><input type="checkbox" v-model="cfg.modes.dom" /> DOM 变化</label
+        ><input type="checkbox" v-model="cfg.modes.dom" /> Mudança no DOM</label
       >
       <label class="checkbox-label"
-        ><input type="checkbox" v-model="cfg.modes.schedule" /> 定时</label
+        ><input type="checkbox" v-model="cfg.modes.schedule" /> Agendamento</label
       >
     </div>
   </div>
 
   <div v-if="cfg.modes.url" class="form-section">
-    <div class="section-title">访问 URL 匹配</div>
+    <div class="section-title">Regras de URL</div>
     <div class="selector-list">
       <div v-for="(r, i) in urlRules" :key="i" class="selector-item">
         <select class="form-select-sm" v-model="r.kind">
-          <option value="url">前缀 URL</option>
-          <option value="domain">域名包含</option>
-          <option value="path">路径前缀</option>
+          <option value="url">Prefixo de URL</option>
+          <option value="domain">Domínio contém</option>
+          <option value="path">Prefixo do caminho</option>
         </select>
         <input
           class="form-input-sm flex-1"
           v-model="r.value"
-          placeholder="例如 https://example.com/app"
+          placeholder="Ex.: https://example.com/app"
         />
         <button class="btn-icon-sm" @click="move(urlRules, i, -1)" :disabled="i === 0">↑</button>
         <button
@@ -61,17 +61,17 @@
         <button class="btn-icon-sm danger" @click="urlRules.splice(i, 1)">×</button>
       </div>
     </div>
-    <button class="btn-sm" @click="urlRules.push({ kind: 'url', value: '' })">+ 添加匹配</button>
+    <button class="btn-sm" @click="urlRules.push({ kind: 'url', value: '' })">+ Nova regra</button>
   </div>
 
   <div v-if="cfg.modes.contextMenu" class="form-section">
-    <div class="section-title">右键菜单</div>
+    <div class="section-title">Menu de contexto</div>
     <div class="form-group">
-      <label class="form-label">标题</label>
-      <input class="form-input" v-model="cfg.contextMenu.title" placeholder="菜单标题" />
+      <label class="form-label">Título</label>
+      <input class="form-input" v-model="cfg.contextMenu.title" placeholder="Título do menu" />
     </div>
     <div class="form-group">
-      <label class="form-label">作用范围</label>
+      <label class="form-label">Contextos</label>
       <div class="checkbox-group">
         <label class="checkbox-label" v-for="c in menuContexts" :key="c">
           <input type="checkbox" :value="c" v-model="cfg.contextMenu.contexts" /> {{ c }}
@@ -81,55 +81,55 @@
   </div>
 
   <div v-if="cfg.modes.command" class="form-section">
-    <div class="section-title">快捷键</div>
+    <div class="section-title">Atalho</div>
     <div class="form-group">
-      <label class="form-label">命令键（需预先在 manifest commands 中声明）</label>
+      <label class="form-label">Comando (precisa estar declarado em commands no manifest)</label>
       <input
         class="form-input"
         v-model="cfg.command.commandKey"
-        placeholder="例如 run_quick_trigger_1"
+        placeholder="Ex.: run_quick_trigger_1"
       />
     </div>
     <div class="text-xs text-slate-500" style="padding: 0 20px"
-      >提示：Chrome 扩展快捷键需要在 manifest 里固定声明，无法运行时动态添加。</div
+      >Dica: atalhos da extensão são fixos no manifest; não dá para criá-los em runtime.</div
     >
   </div>
 
   <div v-if="cfg.modes.dom" class="form-section">
-    <div class="section-title">DOM 变化</div>
+    <div class="section-title">Mudança no DOM</div>
     <div class="form-group">
-      <label class="form-label">选择器</label>
+      <label class="form-label">Seletor</label>
       <input class="form-input" v-model="cfg.dom.selector" placeholder="#app .item" />
     </div>
     <div class="form-group checkbox-group">
       <label class="checkbox-label"
-        ><input type="checkbox" v-model="cfg.dom.appear" /> 出现时触发</label
+        ><input type="checkbox" v-model="cfg.dom.appear" /> Disparar ao aparecer</label
       >
       <label class="checkbox-label"
-        ><input type="checkbox" v-model="cfg.dom.once" /> 仅触发一次</label
+        ><input type="checkbox" v-model="cfg.dom.once" /> Disparar só uma vez</label
       >
     </div>
     <div class="form-group">
-      <label class="form-label">去抖(ms)</label>
+      <label class="form-label">Debounce (ms)</label>
       <input class="form-input" type="number" min="0" v-model.number="cfg.dom.debounceMs" />
     </div>
   </div>
 
   <div v-if="cfg.modes.schedule" class="form-section">
-    <div class="section-title">定时</div>
+    <div class="section-title">Agendamento</div>
     <div class="selector-list">
       <div v-for="(s, i) in schedules" :key="i" class="selector-item">
         <select class="form-select-sm" v-model="s.type">
-          <option value="interval">间隔(分钟)</option>
-          <option value="daily">每天(HH:mm)</option>
-          <option value="once">一次(ISO时间)</option>
+          <option value="interval">Intervalo (min)</option>
+          <option value="daily">Diário (HH:mm)</option>
+          <option value="once">Uma vez (data ISO)</option>
         </select>
         <input
           class="form-input-sm flex-1"
           v-model="s.when"
-          placeholder="5 或 09:00 或 2025-01-01T10:00:00"
+          placeholder="5 ou 09:00 ou 2025-01-01T10:00:00"
         />
-        <label class="checkbox-label"><input type="checkbox" v-model="s.enabled" /> 启用</label>
+        <label class="checkbox-label"><input type="checkbox" v-model="s.enabled" /> Ativo</label>
         <button class="btn-icon-sm" @click="move(schedules, i, -1)" :disabled="i === 0">↑</button>
         <button
           class="btn-icon-sm"
@@ -141,15 +141,15 @@
       </div>
     </div>
     <button class="btn-sm" @click="schedules.push({ type: 'interval', when: '5', enabled: true })"
-      >+ 添加定时</button
+      >+ Adicionar agendamento</button
     >
   </div>
 
   <div class="divider"></div>
   <div class="form-section">
     <div class="text-xs text-slate-500" style="padding: 0 20px"
-      >说明：
-      触发器会在保存工作流时同步到后台触发表（URL/右键/快捷键/DOM）和计划任务（间隔/每天/一次）。
+      >Nota: ao salvar o workflow, os gatilhos são sincronizados com a tabela de gatilhos em segundo
+      plano (URL/menu de contexto/atalho/DOM) e com as tarefas agendadas (intervalo/diário/uma vez).
     </div>
   </div>
 </template>
@@ -175,7 +175,7 @@ function ensure() {
     };
   if (!n.config.url) n.config.url = { rules: [] };
   if (!n.config.contextMenu)
-    n.config.contextMenu = { title: '运行工作流', contexts: ['all'], enabled: false };
+    n.config.contextMenu = { title: 'Executar workflow', contexts: ['all'], enabled: false };
   if (!n.config.command) n.config.command = { commandKey: '', enabled: false };
   if (!n.config.dom)
     n.config.dom = { selector: '', appear: true, once: true, debounceMs: 800, enabled: false };

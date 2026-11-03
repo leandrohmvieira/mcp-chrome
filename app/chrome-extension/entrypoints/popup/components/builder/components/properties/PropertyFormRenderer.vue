@@ -1,6 +1,6 @@
 <template>
   <div class="form-section">
-    <div class="section-title">配置</div>
+    <div class="section-title">Configuração</div>
     <div v-for="field in schema" :key="field.key" class="form-group" :data-field="field.key">
       <label class="form-label">{{ field.label }}</label>
       <component
@@ -13,7 +13,7 @@
     </div>
 
     <div v-if="errors.length" class="error-box">
-      <div class="error-title">⚠️ 配置错误</div>
+      <div class="error-title">⚠️ Erro de configuração</div>
       <div v-for="e in errors" :key="e" class="error-item">{{ e }}</div>
     </div>
   </div>
@@ -70,7 +70,7 @@ const errors = computed(() => {
   const cfg = props.node?.config || {};
   const out: string[] = [];
   for (const f of schema.value)
-    if (f.required && (cfg[f.key] === undefined || cfg[f.key] === '')) out.push(`${f.label} 必填`);
+    if (f.required && (cfg[f.key] === undefined || cfg[f.key] === '')) out.push(`Falta ${f.label}`);
   try {
     const more = spec.value?.validate?.(cfg) || [];
     out.push(...more);
@@ -192,7 +192,7 @@ const JsonField = defineComponent({
         err.value = '';
         emit('update:modelValue', v);
       } catch (e) {
-        err.value = 'JSON 格式错误';
+        err.value = 'JSON inválido';
       }
     });
     return () =>
@@ -200,7 +200,7 @@ const JsonField = defineComponent({
         h('textarea', {
           class: 'form-input',
           rows: 6,
-          placeholder: '输入 JSON',
+          placeholder: 'Digite o JSON',
           value: text.value,
           onInput: (e: any) => (text.value = String(e?.target?.value ?? '')),
         }),
@@ -300,10 +300,10 @@ const ArrayField = defineComponent({
               },
               variables: props.variables || [],
             }),
-            h('button', { class: 'btn-mini', type: 'button', onClick: () => remove(i) }, '删除'),
+            h('button', { class: 'btn-mini', type: 'button', onClick: () => remove(i) }, 'Excluir'),
           ]),
         ),
-        h('button', { class: 'btn', type: 'button', onClick: add }, '新增'),
+        h('button', { class: 'btn', type: 'button', onClick: add }, 'Adicionar'),
       ]);
   },
 });

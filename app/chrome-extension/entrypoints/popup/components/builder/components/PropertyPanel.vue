@@ -4,10 +4,10 @@
     <div v-if="node" class="panel-content">
       <div class="panel-header">
         <div>
-          <div class="header-title">节点属性</div>
+          <div class="header-title">Propriedades do nó</div>
           <div class="header-id">{{ node.id }}</div>
         </div>
-        <button class="btn-delete" type="button" title="删除节点" @click.stop="onRemove">
+        <button class="btn-delete" type="button" title="Excluir nó" @click.stop="onRemove">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path
               d="m4 4 8 8M12 4 4 12"
@@ -21,8 +21,8 @@
 
       <div class="form-section">
         <div class="form-group">
-          <label class="form-label">节点名称</label>
-          <input class="form-input" v-model="node.name" placeholder="输入节点名称" />
+          <label class="form-label">Nome do nó</label>
+          <input class="form-input" v-model="node.name" placeholder="Digite o nome do nó" />
         </div>
       </div>
 
@@ -39,27 +39,27 @@
 
       <!-- 通用设置 -->
       <div class="form-section">
-        <div class="section-title">通用设置</div>
+        <div class="section-title">Configurações gerais</div>
         <div class="form-group">
-          <label class="form-label">超时 (ms)</label>
+          <label class="form-label">Tempo limite (ms)</label>
           <input
             class="form-input"
             type="number"
             v-model.number="(node.config as any).timeoutMs"
             min="0"
-            placeholder="默认使用全局超时"
+            placeholder="Padrão: tempo limite global"
           />
         </div>
         <div class="form-group checkbox-group">
           <label class="checkbox-label">
             <input type="checkbox" v-model="(node.config as any).screenshotOnFail" />
-            <span>失败时截图</span>
+            <span>Captura de tela ao falhar</span>
           </label>
         </div>
       </div>
 
       <div v-if="nodeErrors.length > 0" class="error-box">
-        <div class="error-title">⚠️ 配置错误</div>
+        <div class="error-title">⚠️ Erro de configuração</div>
         <div v-for="e in nodeErrors" :key="e" class="error-item">{{ e }}</div>
       </div>
     </div>
@@ -83,7 +83,7 @@
           opacity="0.3"
         />
       </svg>
-      <div class="empty-text">选择一个节点<br />查看和编辑属性</div>
+      <div class="empty-text">Selecione um nó<br />para ver e editar as propriedades</div>
     </div>
   </aside>
 </template>
@@ -260,7 +260,7 @@ const whileJson = computed({
 });
 
 function onCreateSubflow() {
-  const id = prompt('请输入新子流ID');
+  const id = prompt('Informe o ID do novo subfluxo');
   if (!id) return;
   // Emit kebab-case event to match parent template listener
   emit('create-subflow', id);
@@ -273,8 +273,8 @@ const extractErrors = computed(() => {
   const n = props.node;
   if (!n || n.type !== 'extract') return [] as string[];
   const errs: string[] = [];
-  if (!n.config?.saveAs) errs.push('需填写保存变量名');
-  if (!n.config?.selector && !n.config?.js) errs.push('需提供 selector 或 js');
+  if (!n.config?.saveAs) errs.push('Informe o nome da variável de destino');
+  if (!n.config?.selector && !n.config?.js) errs.push('Informe selector ou js');
   return errs;
 });
 const switchTabError = computed(() => {

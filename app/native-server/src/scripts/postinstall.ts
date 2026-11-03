@@ -213,7 +213,7 @@ async function tryRegisterNativeHost(): Promise<void> {
   } catch (error) {
     console.log(
       colorText(
-        `注册过程中出现错误: ${error instanceof Error ? error.message : String(error)}`,
+        `Erro durante o registro: ${error instanceof Error ? error.message : String(error)}`,
         'red',
       ),
     );
