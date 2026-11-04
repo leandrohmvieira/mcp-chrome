@@ -14,6 +14,7 @@ no commits since 2026-01-06, and npm `mcp-chrome-bridge@1.0.31` (2025-12-30) is 
 |---|---|
 | `native-server/src/mcp/mcp-server.ts` builds a new `Server` per connection | Upstream bug #321: the cached singleton throws "Already connected to a transport" for every client after the first, so one `claude mcp list` bricks the endpoint. Upstream PRs #301/#338/#354 were never merged. |
 | User-visible text in pt-BR: new `_locales/pt_BR`, `default_locale: 'pt_BR'`, translated hard-coded strings (popup, sidepanel, workflow builder, record-replay, inject scripts, native-server CLI) | Upstream defaulted to `zh_CN`, so any Chrome language without a locale (pt-BR included) showed Chinese. Code comments and the `*_zh.md` docs stay Chinese on purpose. Kept on purpose: Readability's ad/loading regexes (pt words appended) and the multilingual model-warmup texts. |
+| The quick-panel and element-picker content scripts clean up on a non-persisted `pagehide` instead of `unload` | `unload` is deprecated and many sites block it via Permissions-Policy. That logged one "Permissions policy violation: unload is not allowed" error per tab in chrome://extensions, and the listener also kept pages out of the back/forward cache. |
 
 ## Building on Windows (native server)
 
