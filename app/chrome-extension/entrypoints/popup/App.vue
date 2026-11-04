@@ -147,7 +147,7 @@
               <div class="entry-content">
                 <span class="entry-title">
                   Workflows
-                  <span class="coming-soon-badge">Coming Soon</span>
+                  <span class="coming-soon-badge">Em breve</span>
                 </span>
                 <span class="entry-desc">Grave e reproduza automações</span>
               </div>
@@ -235,7 +235,7 @@
 
       <div class="footer">
         <div class="footer-links">
-          <button class="footer-link" @click="openWelcomePage" title="View installation guide">
+          <button class="footer-link" @click="openWelcomePage" title="Ver o guia de instalação">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 stroke-linecap="round"
@@ -244,9 +244,9 @@
                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            Guide
+            Guia
           </button>
-          <button class="footer-link" @click="openTroubleshooting" title="Troubleshooting">
+          <button class="footer-link" @click="openTroubleshooting" title="Solução de problemas">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 stroke-linecap="round"
@@ -255,10 +255,10 @@
                 d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
               />
             </svg>
-            Docs
+            Documentação
           </button>
         </div>
-        <p class="footer-text">chrome mcp server for ai</p>
+        <p class="footer-text">Chrome MCP Server para IA</p>
       </div>
     </div>
 

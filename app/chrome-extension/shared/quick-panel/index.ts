@@ -96,9 +96,9 @@ const LOG_PREFIX = '[QuickPanelController]';
  *   }
  * });
  *
- * // Cleanup on extension unload
- * window.addEventListener('unload', () => {
- *   quickPanel.dispose();
+ * // Cleanup when the page is discarded (not on bfcache entry)
+ * window.addEventListener('pagehide', (event) => {
+ *   if (!event.persisted) quickPanel.dispose();
  * });
  * ```
  */

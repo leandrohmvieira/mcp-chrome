@@ -194,8 +194,10 @@ export default defineContentScript({
     // Register message listener
     chrome.runtime.onMessage.addListener(handleMessage);
 
-    // Cleanup on page unload
-    window.addEventListener('unload', () => {
+    // Cleanup when the page is discarded ('pagehide', not the deprecated 'unload'; see
+    // quick-panel.content.ts). Skip persisted pagehide: the page may return from the bfcache.
+    window.addEventListener('pagehide', (event) => {
+      if (event.persisted) return;
       chrome.runtime.onMessage.removeListener(handleMessage);
       controller?.dispose();
       controller = null;

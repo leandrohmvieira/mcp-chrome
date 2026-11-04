@@ -103,8 +103,11 @@ export default defineContentScript({
     // Register message listener
     chrome.runtime.onMessage.addListener(handleMessage);
 
-    // Cleanup on page unload
-    window.addEventListener('unload', () => {
+    // Cleanup when the page is discarded. 'unload' is deprecated, blocked by Permissions-Policy
+    // on many sites (one error per tab in chrome://extensions) and disables the bfcache. A
+    // persisted pagehide means the page went into the bfcache and may come back, so keep state.
+    window.addEventListener('pagehide', (event) => {
+      if (event.persisted) return;
       chrome.runtime.onMessage.removeListener(handleMessage);
       if (controller) {
         controller.dispose();
