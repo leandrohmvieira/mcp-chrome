@@ -47,3 +47,5 @@ CLAUDE.md
 
 .docs/
 .claude/
+# packed release assets (scripts/pack-release.mjs)
+/release/
