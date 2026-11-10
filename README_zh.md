@@ -1,5 +1,9 @@
 # Chrome MCP Server 🚀
 
+> **注意 / Note:** 这是 [hangwin/mcp-chrome](https://github.com/hangwin/mcp-chrome) 的维护分支（maintained fork），上游自 2026-01-06 起已停止维护。
+> 请按 [README.md 的安装说明](README.md#install) 使用本仓库的 Release 和安装脚本安装；下文的安装步骤来自上游，已过时。
+> This is the maintained fork; upstream is abandoned. Install with this repository's releases and installers, see [README.md#install](README.md#install). The install steps below are upstream's and out of date.
+
 [![许可证: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8+-blue.svg)](https://www.typescriptlang.org/)
 [![Chrome 扩展](https://img.shields.io/badge/Chrome-Extension-green.svg)](https://developer.chrome.com/docs/extensions/)

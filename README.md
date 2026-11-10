@@ -1,26 +1,142 @@
-# Chrome MCP Server 🚀
+# Chrome MCP Server — maintained fork
 
-[![Stars](https://img.shields.io/github/stars/hangwin/mcp-chrome)](https://img.shields.io/github/stars/hangwin/mcp-chrome)
+[![Latest release](https://img.shields.io/github/v/release/leandrohmvieira/mcp-chrome)](https://github.com/leandrohmvieira/mcp-chrome/releases/latest)
+[![Build and install test](https://github.com/leandrohmvieira/mcp-chrome/actions/workflows/release.yml/badge.svg)](https://github.com/leandrohmvieira/mcp-chrome/actions/workflows/release.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.8+-blue.svg)](https://www.typescriptlang.org/)
-[![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-green.svg)](https://developer.chrome.com/docs/extensions/)
-[![Release](https://img.shields.io/github/v/release/hangwin/mcp-chrome.svg)](https://img.shields.io/github/v/release/hangwin/mcp-chrome.svg)
 
-> 🌟 **Turn your Chrome browser into your intelligent assistant** - Let AI take control of your browser, transforming it into a powerful AI-controlled automation tool.
+> **This is the maintained continuation of [hangwin/mcp-chrome](https://github.com/hangwin/mcp-chrome), which is abandoned.**
+> Upstream has had no commits since 2026-01-06, its last npm release (`mcp-chrome-bridge@1.0.31`) dates from 2025-12-30,
+> and fixes such as the one for "Already connected to a transport" (#321) were never merged. Development, fixes and
+> releases happen here now.
+>
+> **Install from this repository, not from upstream.** `npm install -g mcp-chrome-bridge` and hangwin's release zip both
+> give you the old, unmaintained code.
 
-**📖 Documentation**: [English](README.md) | [中文](README_zh.md)
+Chrome MCP Server turns the Chrome you already use, with your logins, cookies and settings, into an MCP server that AI
+assistants (Claude Code, Claude Desktop, Cursor, Codex, ...) can drive: navigate, read pages, click, fill forms, take
+screenshots, capture network traffic, search history and bookmarks, and more.
 
-> The project is still in its early stages and is under intensive development. More features, stability improvements, and other enhancements will follow.
+**📖 Documentation**: [English](README.md) | [中文](README_zh.md) (the Chinese text is upstream's and describes the old install)
 
----
+## Install
+
+You need Google Chrome (or Chromium) and Node.js 20 or newer. On Windows the installer offers to install Node.js LTS
+with winget if it's missing.
+
+**Windows** (PowerShell):
+
+```powershell
+irm https://raw.githubusercontent.com/leandrohmvieira/mcp-chrome/main/scripts/install.ps1 | iex
+```
+
+**macOS / Linux**:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/leandrohmvieira/mcp-chrome/main/scripts/install.sh | bash
+```
+
+The installer takes the [latest release](https://github.com/leandrohmvieira/mcp-chrome/releases/latest) and:
+
+1. installs the bridge (native-messaging host + MCP server) with npm and registers it with Chrome;
+2. unpacks the extension into a folder that stays put — `%LOCALAPPDATA%\mcp-chrome\extension` on Windows,
+   `~/Library/Application Support/mcp-chrome/extension` on macOS, `~/.local/share/mcp-chrome/extension` on Linux;
+3. adds the server to Claude Code (`claude mcp add`) when the `claude` CLI is installed.
+
+Then do the one step Chrome won't let a script do: open `chrome://extensions`, turn on **Developer mode**, click
+**Load unpacked** and pick that folder (on Windows its path is already on the clipboard). The extension connects to the
+bridge on its own. The MCP endpoint is `http://127.0.0.1:12306/mcp`.
+
+- **Update**: run the same command again, then click the reload icon on the extension in `chrome://extensions`
+  (or restart Chrome).
+- **Check an install**: `mcp-chrome-bridge doctor`.
+- **Options**: pick a release, folder, or skip steps. Windows: `-Version v1.1.0`, `-ExtensionDir <path>`, `-NoClaude`,
+  `-NoBrowser`, passed as `& ([scriptblock]::Create((irm <installer url>))) -NoClaude`. macOS/Linux: `--version`,
+  `--extension-dir`, `--no-claude`, `--no-browser`, passed as `curl -fsSL <installer url> | bash -s -- --no-claude`.
+
+### For AI agents installing this
+
+If a person pointed you at this repository and asked you to install it:
+
+- Use the installer above. It is non-interactive and safe to re-run. Don't install `hangwin/mcp-chrome`, its release
+  zip, or `mcp-chrome-bridge` from the npm registry — same names, older code.
+- Don't build from source. Each release ships the built bridge (`mcp-chrome-bridge-<version>.tgz`) and extension
+  (`mcp-chrome-extension-<version>.zip`), tested on clean Windows, macOS and Linux machines in CI.
+- The extension ID is fixed: `ifjjgkpcpjfkfomkpbnkhhblnfgejono`, set by the public key committed in
+  `app/chrome-extension/wxt.config.ts`. You don't need a key file, and you shouldn't generate a new ID.
+- The person has to do "Load unpacked" themselves, since Chrome blocks scripted installs of unpacked extensions. Give
+  them the folder path the installer printed.
+- To verify: `mcp-chrome-bridge doctor` must pass, and once the extension is loaded, an MCP `initialize` sent to
+  `http://127.0.0.1:12306/mcp` answers with `serverInfo.version` equal to the release version.
+
+### Manual install
+
+1. Download `mcp-chrome-bridge-<version>.tgz` and `mcp-chrome-extension-<version>.zip` from the
+   [latest release](https://github.com/leandrohmvieira/mcp-chrome/releases/latest).
+2. `npm install -g ./mcp-chrome-bridge-<version>.tgz`. That registers the native host; if it reports otherwise, run
+   `mcp-chrome-bridge register`.
+3. Unzip the extension into a folder you'll keep, then load it with **Load unpacked** in `chrome://extensions`.
+
+### Coming from hangwin/mcp-chrome
+
+Run the installer. It replaces the global `mcp-chrome-bridge` package and re-registers the native host. The new bridge
+still accepts the upstream extension (ID `hbdgbgagpkpjffpklnamcljpakneikee`), so nothing stops working in between.
+Then remove the old "Chrome MCP Server" in `chrome://extensions` and load the new folder. Keep only one of the two
+loaded: both would try to start the server on port 12306. The fork's extension has a different ID, so its settings,
+such as a custom port, start from the defaults.
+
+### Connecting MCP clients
+
+Streamable HTTP (recommended). Claude Code:
+
+```bash
+claude mcp add --scope user --transport http chrome-mcp-server http://127.0.0.1:12306/mcp
+```
+
+Other clients:
+
+```json
+{
+  "mcpServers": {
+    "chrome-mcp-server": { "type": "streamableHttp", "url": "http://127.0.0.1:12306/mcp" }
+  }
+}
+```
+
+For clients that only speak stdio, the bridge also installs `mcp-chrome-stdio`, a stdio proxy to the same server:
+
+```json
+{ "mcpServers": { "chrome-mcp-stdio": { "command": "mcp-chrome-stdio" } } }
+```
+
+### Building from source
+
+See [FORK.md](FORK.md#building). `node scripts/pack-release.mjs` produces the same files as a release.
+
+## What this fork changes
+
+See [CHANGELOG.md](CHANGELOG.md) for each release and [FORK.md](FORK.md) for every divergence from upstream. In short:
+
+- **Installable in one command**: GitHub releases with the built bridge and extension, installers for Windows, macOS
+  and Linux, and a CI job that runs those installers on clean machines for every change.
+- **Fixed extension ID** that comes from a public key in the repo, so every build matches the bridge and no key file
+  is needed.
+- **No compiler needed**: `better-sqlite3` 12 has prebuilt binaries for Node 20–26 and is optional. Upstream's 11.x
+  had none for Node 24 on Windows, so `npm install -g` failed without Visual Studio Build Tools.
+- **Multiple MCP clients at once**: a fresh MCP server per connection (upstream #321), where upstream let one client,
+  even a `claude mcp list` health check, lock everyone else out.
+- **pt-BR translation**, and pt-BR instead of Chinese as the fallback language for browsers in other languages.
+- The content scripts no longer use the deprecated `unload` event, which flooded `chrome://extensions` with
+  permissions-policy errors.
+
+Issues and pull requests: [github.com/leandrohmvieira/mcp-chrome](https://github.com/leandrohmvieira/mcp-chrome/issues).
 
 ## 🎯 What is Chrome MCP Server?
 
 Chrome MCP Server is a Chrome extension-based **Model Context Protocol (MCP) server** that exposes your Chrome browser functionality to AI assistants like Claude, enabling complex browser automation, content analysis, and semantic search. Unlike traditional browser automation tools (like Playwright), **Chrome MCP Server** directly uses your daily Chrome browser, leveraging existing user habits, configurations, and login states, allowing various large models or chatbots to take control of your browser and truly become your everyday assistant.
 
-## ✨ New Features(2025/12/30)
+## ✨ Visual Editor
 
-- **A New Visual Editor for Claude Code & Codex**, for more detail here: [VisualEditor](docs/VisualEditor.md)
+- **A Visual Editor for Claude Code & Codex**, for more detail here: [VisualEditor](docs/VisualEditor.md)
 
 ## ✨ Core Features
 
@@ -44,103 +160,6 @@ Chrome MCP Server is a Chrome extension-based **Model Context Protocol (MCP) ser
 | **API Access**          | ⚠️ Limited to Playwright API                                                                                              | ✅ Full access to Chrome native APIs                                                                   |
 | **Startup Speed**       | ❌ Requires launching browser process                                                                                     | ✅ Only needs to activate extension                                                                    |
 | **Response Speed**      | 50-200ms inter-process communication                                                                                      | ✅ Faster                                                                                              |
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js >= 20.0.0 and pnpm/npm
-- Chrome/Chromium browser
-
-### Installation Steps
-
-1. **Download the latest Chrome extension from GitHub**
-
-Download link: https://github.com/hangwin/mcp-chrome/releases
-
-2. **Install mcp-chrome-bridge globally**
-
-npm
-
-```bash
-npm install -g mcp-chrome-bridge
-```
-
-pnpm
-
-```bash
-# Method 1: Enable scripts globally (recommended)
-pnpm config set enable-pre-post-scripts true
-pnpm install -g mcp-chrome-bridge
-
-# Method 2: Manual registration (if postinstall doesn't run)
-pnpm install -g mcp-chrome-bridge
-mcp-chrome-bridge register
-```
-
-> Note: pnpm v7+ disables postinstall scripts by default for security. The `enable-pre-post-scripts` setting controls whether pre/post install scripts run. If automatic registration fails, use the manual registration command above.
-
-3. **Load Chrome Extension**
-   - Open Chrome and go to `chrome://extensions/`
-   - Enable "Developer mode"
-   - Click "Load unpacked" and select `your/dowloaded/extension/folder`
-   - Click the extension icon to open the plugin, then click connect to see the MCP configuration
-     <img width="475" alt="Screenshot 2025-06-09 15 52 06" src="https://github.com/user-attachments/assets/241e57b8-c55f-41a4-9188-0367293dc5bc" />
-
-### Usage with MCP Protocol Clients
-
-#### Using Streamable HTTP Connection (👍🏻 Recommended)
-
-Add the following configuration to your MCP client configuration (using CherryStudio as an example):
-
-> Streamable HTTP connection method is recommended
-
-```json
-{
-  "mcpServers": {
-    "chrome-mcp-server": {
-      "type": "streamableHttp",
-      "url": "http://127.0.0.1:12306/mcp"
-    }
-  }
-}
-```
-
-#### Using STDIO Connection (Alternative)
-
-If your client only supports stdio connection method, please use the following approach:
-
-1. First, check the installation location of the npm package you just installed
-
-```sh
-# npm check method
-npm list -g mcp-chrome-bridge
-# pnpm check method
-pnpm list -g mcp-chrome-bridge
-```
-
-Assuming the command above outputs the path: /Users/xxx/Library/pnpm/global/5
-Then your final path would be: /Users/xxx/Library/pnpm/global/5/node_modules/mcp-chrome-bridge/dist/mcp/mcp-server-stdio.js
-
-2. Replace the configuration below with the final path you just obtained
-
-```json
-{
-  "mcpServers": {
-    "chrome-mcp-stdio": {
-      "command": "npx",
-      "args": [
-        "node",
-        "/Users/xxx/Library/pnpm/global/5/node_modules/mcp-chrome-bridge/dist/mcp/mcp-server-stdio.js"
-      ]
-    }
-  }
-}
-```
-
-eg：config in augment:
-
-<img width="494" alt="截屏2025-06-22 22 11 25" src="https://github.com/user-attachments/assets/48eefc0c-a257-4d3b-8bbe-d7ff716de2bf" />
 
 ## 🛠️ Available Tools
 
@@ -279,7 +298,7 @@ https://github.com/user-attachments/assets/83de4008-bb7e-494d-9b0f-98325cfea592
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see [CONTRIBUTING.md](docs/CONTRIBUTING.md) for detailed guidelines.
+Contributions are welcome here: open an [issue](https://github.com/leandrohmvieira/mcp-chrome/issues) or a pull request against `main`. See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for the code guidelines.
 
 ## 🚧 Future Roadmap
 
