@@ -88,6 +88,8 @@ else
   fi
 fi
 [[ -f "$TGZ" && -f "$ZIP" ]] || die "bridge or extension file missing"
+# npm reads a relative "dir/file.tgz" as a GitHub "owner/repo" shorthand, so pass an absolute path.
+TGZ="$(cd "$(dirname "$TGZ")" && pwd)/$(basename "$TGZ")"
 
 # --- 3. Bridge --------------------------------------------------------------
 step "Installing the bridge (npm install -g $(basename "$TGZ"))"
