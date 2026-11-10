@@ -10,7 +10,13 @@ import IconsResolver from 'unplugin-icons/resolver';
 config({ path: resolve(process.cwd(), '.env') });
 config({ path: resolve(process.cwd(), '.env.local') });
 
-const CHROME_EXTENSION_KEY = process.env.CHROME_EXTENSION_KEY;
+// Public key of this fork's extension. It pins the extension id to
+// ifjjgkpcpjfkfomkpbnkhhblnfgejono on every build, so the native host's allowed_origins always match.
+// It is a public key, not a secret. CHROME_EXTENSION_KEY overrides it (e.g. to keep the
+// upstream id hbdgbgagpkpjffpklnamcljpakneikee on an existing install).
+const FORK_EXTENSION_PUBLIC_KEY =
+  'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3BwfVsfAZ5GE0jceTj2IYf8ugkh9I27xfVuyi+QrFjBHdgjsBgMoIqBFXsSebGlO4jwSH/R/wushz4QPjq82MGD/DUYZm5wdNAZl8n1QfVRgZJMFYtFZnLcPRlz8JhxIjTNKCi14E7LNeohBvYyzFl5hx2/v4DUNNO4vlm3edIKURvxLEzOpOmo6K2dmfd7RccqFnPD4GzmKxHImwRbWgLiEkIIsFx2jedTUvIKpdWAiZp5H3iie/pOVXdVWMmYf2tggOK8krppVtTTi78ZlOnDCwNHaf7aBV1uRyd4byTxNMGtTtI5GZtPcM8r/ToWoMWc3voIJPjnFKsnXBMOqFQIDAQAB';
+const CHROME_EXTENSION_KEY = process.env.CHROME_EXTENSION_KEY || FORK_EXTENSION_PUBLIC_KEY;
 // Detect dev mode early for manifest-level switches
 const IS_DEV = process.env.NODE_ENV !== 'production' && process.env.MODE !== 'production';
 
@@ -32,7 +38,6 @@ export default defineConfig({
     // ],
   },
   manifest: {
-    // Use environment variable for the key, fallback to undefined if not set
     key: CHROME_EXTENSION_KEY,
     default_locale: 'pt_BR',
     name: '__MSG_extensionName__',

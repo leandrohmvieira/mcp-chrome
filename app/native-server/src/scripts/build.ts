@@ -51,12 +51,14 @@ Este programa é o host de Native Messaging da extensão do Chrome.
 
 ## Instalação
 
-1. Verifique se o Node.js está instalado
-2. Instale este programa globalmente:
-   \`\`\`
-   npm install -g ${packageJson.name}
-   \`\`\`
-3. Registre o host de Native Messaging:
+Use o instalador do fork mantido (github.com/leandrohmvieira/mcp-chrome), que instala este host e a extensão:
+
+- Windows: \`irm https://raw.githubusercontent.com/leandrohmvieira/mcp-chrome/main/scripts/install.ps1 | iex\`
+- macOS / Linux: \`curl -fsSL https://raw.githubusercontent.com/leandrohmvieira/mcp-chrome/main/scripts/install.sh | bash\`
+
+Não use \`npm install -g ${packageJson.name}\` do registro npm: lá está a versão antiga e abandonada do upstream.
+
+Se o registro do host de Native Messaging falhar:
    \`\`\`
    # Instalação no nível do usuário (recomendado)
    ${packageJson.name} register

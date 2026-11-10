@@ -7,8 +7,11 @@
  * - Auto-create tables on first run (no migration tool needed)
  * - Configurable path via environment variable
  */
-import Database from 'better-sqlite3';
-import { drizzle, BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
+// better-sqlite3 is an optional dependency (only the agent chat feature uses it), so it and the
+// drizzle driver that requires it are loaded on first use. A machine where its native build
+// failed still runs the MCP server.
+import type Database from 'better-sqlite3';
+import type { BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
 import { sql } from 'drizzle-orm';
 import * as schema from './schema';
 import { getAgentDataDir } from '../storage';
@@ -188,7 +191,18 @@ export function getDb(): DrizzleDB {
   const dbPath = getDatabasePath();
 
   // Create SQLite connection
-  sqliteInstance = new Database(dbPath);
+  let BetterSqlite: typeof Database;
+  let drizzle: typeof import('drizzle-orm/better-sqlite3').drizzle;
+  try {
+    BetterSqlite = require('better-sqlite3');
+    drizzle = require('drizzle-orm/better-sqlite3').drizzle;
+  } catch (error) {
+    throw new Error(
+      `better-sqlite3 is not installed or failed to build, so agent storage is unavailable ` +
+        `(the MCP browser tools are not affected): ${error instanceof Error ? error.message : error}`,
+    );
+  }
+  sqliteInstance = new BetterSqlite(dbPath);
 
   // Enable WAL mode for better concurrent read performance
   sqliteInstance.pragma('journal_mode = WAL');

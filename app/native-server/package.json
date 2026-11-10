@@ -1,7 +1,7 @@
 {
   "name": "mcp-chrome-bridge",
-  "version": "1.0.29",
-  "description": "Chrome Native-Messaging host (Node)",
+  "version": "1.1.0",
+  "description": "Native-messaging host and MCP server for the mcp-chrome extension (maintained fork of hangwin/mcp-chrome)",
   "main": "dist/index.js",
   "bin": {
     "mcp-chrome-bridge": "./dist/cli.js",
@@ -34,12 +34,20 @@
   ],
   "author": "hangye",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leandrohmvieira/mcp-chrome.git",
+    "directory": "app/native-server"
+  },
+  "homepage": "https://github.com/leandrohmvieira/mcp-chrome#readme",
+  "bugs": {
+    "url": "https://github.com/leandrohmvieira/mcp-chrome/issues"
+  },
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "^0.1.69",
     "@fastify/cors": "^11.0.1",
     "@modelcontextprotocol/sdk": "^1.11.0",
     "@types/node-fetch": "2",
-    "better-sqlite3": "^11.6.0",
     "chalk": "^5.4.1",
     "chrome-devtools-frontend": "^1.0.1299282",
     "chrome-mcp-shared": "workspace:*",
@@ -50,6 +58,9 @@
     "node-fetch": "2",
     "pino": "^9.6.0",
     "uuid": "^11.1.0"
+  },
+  "optionalDependencies": {
+    "better-sqlite3": "^12.4.1"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",

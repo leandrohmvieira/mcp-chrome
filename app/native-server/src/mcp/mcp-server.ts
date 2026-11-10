@@ -15,7 +15,8 @@ export const getMcpServer = () => {
   const server = new Server(
     {
       name: 'ChromeMcpServer',
-      version: '1.0.0',
+      // the bridge's package version, so a client can tell which build it is talking to
+      version: require('../../package.json').version,
     },
     {
       capabilities: {

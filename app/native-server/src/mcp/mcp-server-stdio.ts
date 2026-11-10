@@ -37,7 +37,8 @@ export const getStdioMcpServer = () => {
   stdioMcpServer = new Server(
     {
       name: 'StdioChromeMcpServer',
-      version: '1.0.0',
+      // the bridge's package version, so a client can tell which build it is talking to
+      version: require('../../package.json').version,
     },
     {
       capabilities: {
